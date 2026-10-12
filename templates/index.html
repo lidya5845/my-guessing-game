@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة تخمين الرقم 🎮</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fff5eb, #ffe3cf);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-card {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px 25px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 35px #d99b7130;
+            border: 1px solid #ffe6d5;
+        }
+
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #df8745;
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            color: #777;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #f6d7c1;
+            border-radius: 12px;
+            font-size: 17px;
+            text-align: center;
+            outline: none;
+            background: #fffbf8;
+            margin-bottom: 15px;
+        }
+
+        input:focus {
+            border-color: #f7ab5c;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #f7ab5c;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ed9542;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            color: #c97939;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        .result-image {
+            display: block;
+            width: 200px;
+            max-width: 100%;
+            height: auto;
+            margin: 15px auto;
+            border-radius: 12px;
+        }
+
+        .hint {
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="game-card">
+
+        <div class="game-icon">🎲</div>
+
+        <h1>لعبة تخمين الرقم</h1>
+
+        <p class="description">
+            أهلًا فيكِ بعالمي الصغير! 🧡<br>
+            اخترت رقمًا بين 1 و10، بتقدري تخمّنيه؟
+        </p>
+
+        <form method="POST">
+            <input
+                type="text"
+                name="player_name"
+                placeholder="اكتبي اسمك 🧡"
+                value="{{ player_name }}"
+                required
+            >
+
+            <input
+                type="number"
+                name="guess"
+                min="1"
+                max="10"
+                placeholder="خمني الرقم من 1 إلى 10"
+                required
+            >
+
+            <button type="submit">خمنّي! ✨</button>
+        </form>
+
+        <p class="message">{{ message }}</p>
+
+        {% if result == "happy" %}
+            <img
+                class="result-image"
+                src="{{ url_for('static', filename='happy.gif') }}"
+            >
+        {% elif result == "sad" %}
+            <img
+                class="result-image"
+                src="{{ url_for('static', filename='sad.gif') }}"
+            >
+        {% endif %}
+
+        <p class="hint">صُنع بكل حب ♡</p>
+
+    </main>
+</body>
+</html>
